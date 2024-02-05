@@ -47,7 +47,7 @@ function filterTemples(temples) {
             filteredTemples = temples.filter(temple => !temple.location.includes("Utah"));
             break;
         case "older":
-            filteredTemples = temples.filter(temple => new Date(temple.dedicated) > new Date(1950, 0, 1));
+            filteredTemples = temples.filter(temple => new Date(temple.dedicated) < new Date(1950, 0, 1));
             break;
         default:
             filteredTemples = temples;
