@@ -64,10 +64,6 @@ function addTask(task) {
     deleteButton.textContent = "Delete";
     listItem.appendChild(deleteButton);
 
-    const editButton = document.createElement("button");
-    editButton.textContent = "Edit";
-    listItem.appendChild(editButton);
-
     todoList.appendChild(listItem);
 
     checkBox.addEventListener("change", function() {
@@ -82,22 +78,5 @@ function addTask(task) {
         todoList.removeChild(listItem);
     });
 
-    editButton.addEventListener("click", function () {
-        const isEditing = listItem.classList.contains("editing");
-
-        if (isEditing) {
-            taskText.textContent = this.previousSibling.value;
-            listItem.classList.remove("editing");
-            editButton.textContent = "Edit";
-        } else {
-            const input = document.createElement("input");
-            input.type = "text";
-            input.value = taskText.textContent;
-            listItem.insertBefore(input, taskText);
-            listItem.removeChild(taskText);
-            listItem.classList.add("editing");
-            editButton.textContent = "Save";
-        }
-    });
 }
 
