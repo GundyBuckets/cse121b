@@ -17,15 +17,26 @@ todoForm.addEventListener("submit", function(event) {
     addTask(newTask);
 });
 
-function importToDoList () {
-    const url = importInput.value;
+importForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const link = importInput.value;
 
-    fetch(url)
+    if (link == "") {
+        alert("Please enter a valid link!");
+        return;
+    }
+
+    importInput.value = "";
+    importToDoList(link);
+})
+
+function importToDoList(link) {
+    fetch(link)
         .then(response => {
             if (!response.ok) {
-                throw new Error("Network response was not ok: ${response.statusText}");
+                throw new Error(`Network response was not ok: ${response.statusText}`);
             }
-            return response.json()
+            return response.json();
         })
         .then(data => {
             console.log(data);
@@ -36,8 +47,8 @@ function importToDoList () {
         .catch(error => {
             console.error("Error fetching and converting JSON:", error);
         });
-    
 }
+
 function addTask(task) {
     // Creates the new Task element
     const listItem = document.createElement("li");
